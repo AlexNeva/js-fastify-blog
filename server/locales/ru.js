@@ -46,6 +46,33 @@ export default {
           placeholder: "Введите содержимое статьи",
         },
       },
+      comment: {
+        author: {
+          label: "Имя",
+        },
+        content: {
+          label: "Комментарий",
+          placeholder: "Введите комментарий",
+        },
+        create: {
+          success: "Комментарий добавлен",
+          error: "Не удалось добавить комментарий",
+        },
+        delete: {
+          success: "Комментарий удалён",
+          error: "Не удалось удалить комментарий",
+        },
+      },
+      comments: {
+        header: "Комментарии",
+        empty: "Комментариев пока нет",
+        delete: "Удалить",
+        delete_confirmation: "Удалить комментарий?",
+        form: {
+          header: "Оставить комментарий",
+          submit: "Отправить",
+        },
+      },
       articles: {
         index: {
           header: "Статьи",

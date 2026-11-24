@@ -1,17 +1,19 @@
 <%
   const errors = it.errors ?? [];
+  const scope = it.scope ?? 'article';
+  const fieldPrefix = it.fieldPrefix ?? 'data';
   const errorText = errors
     .filter((error) => error.path === it.propertyName)
     .map(({ message }) => message)
     .join('. ');
-  const inputId = `data_${it.propertyName}`;
+  const inputId = `${fieldPrefix}_${it.propertyName}`;
   const fieldClass = 'w-full rounded border border-gray-300 px-3 py-2';
 %>
 <div class="mb-4">
-  <label class="mb-1 block text-sm font-medium" for="<%= inputId %>"><%= it.t(`views.article.${it.propertyName}.label`) %></label>
+  <label class="mb-1 block text-sm font-medium" for="<%= inputId %>"><%= it.t(`views.${scope}.${it.propertyName}.label`) %></label>
   <textarea
     id="<%= inputId %>"
-    name="data[<%= it.propertyName %>]"
+    name="<%= fieldPrefix %>[<%= it.propertyName %>]"
     class="<%= fieldClass %><%= errorText ? ' border-red-500' : '' %>"
     placeholder="<%= it.placeholder ?? '' %>"
     rows="<%= it.rows ?? 3 %>"
