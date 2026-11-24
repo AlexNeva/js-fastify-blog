@@ -43,6 +43,33 @@ export default {
           placeholder: "Enter article content",
         },
       },
+      comment: {
+        author: {
+          label: "Name",
+        },
+        content: {
+          label: "Comment",
+          placeholder: "Write a comment",
+        },
+        create: {
+          success: "Comment was created",
+          error: "Failed to create comment",
+        },
+        delete: {
+          success: "Comment was deleted",
+          error: "Failed to delete comment",
+        },
+      },
+      comments: {
+        header: "Comments",
+        empty: "No comments yet",
+        delete: "Delete",
+        delete_confirmation: "Delete this comment?",
+        form: {
+          header: "Leave a comment",
+          submit: "Send",
+        },
+      },
       articles: {
         index: {
           header: "Articles",

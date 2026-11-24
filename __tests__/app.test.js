@@ -276,6 +276,65 @@ describe("requests", () => {
     expect(response2.statusCode).toBe(200);
   });
 
+  // Раньше отсутствующая статья отдавала 500: findArticle возвращал null, а
+  // шаблон обращался к article.title. Нечисловой id падал ещё в SQL.
+  test("missing article - GET /articles/:id returns 404", async () => {
+    const response = await app.inject({
+      method: "GET",
+      url: "/articles/999999",
+    });
+
+    expect(response.statusCode).toBe(404);
+  });
+
+  test("missing article - GET /articles/:id/edit returns 404", async () => {
+    const response = await app.inject({
+      method: "GET",
+      url: "/articles/999999/edit",
+    });
+
+    expect(response.statusCode).toBe(404);
+  });
+
+  test("non-numeric article id - GET /articles/:id returns 404", async () => {
+    const response = await app.inject({
+      method: "GET",
+      url: "/articles/not-a-number",
+    });
+
+    expect(response.statusCode).toBe(404);
+  });
+
+  test("out-of-range article id - GET /articles/:id returns 404", async () => {
+    const response = await app.inject({
+      method: "GET",
+      url: "/articles/9999999999",
+    });
+
+    expect(response.statusCode).toBe(404);
+  });
+
+  test("missing article - PATCH /articles/:id returns 404", async () => {
+    const response = await app.inject({
+      method: "PATCH",
+      url: "/articles/999999",
+      payload: {
+        data: { title: "Updated", content: "Updated content" },
+      },
+    });
+
+    expect(response.statusCode).toBe(404);
+  });
+
+  test("missing article - DELETE /articles/:id returns 404", async () => {
+    const response = await app.inject({
+      method: "DELETE",
+      url: "/articles/999999",
+    });
+
+    expect(response.statusCode).toBe(404);
+  });
+
   afterAll(async () => {
     await app.close();
   });
